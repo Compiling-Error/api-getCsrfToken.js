@@ -1,6 +1,12 @@
-import fetch from 'node-fetch';
-
 export default async function handler(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // 🔥 Allow requests from any domain
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
     try {
         const response = await fetch('https://launchpad.classlink.com/cfisd', {
             method: 'GET',
@@ -8,7 +14,7 @@ export default async function handler(req, res) {
                 'User-Agent': 'Mozilla/5.0',
                 'Accept': '*/*'
             },
-            credentials: 'include' // Required for authentication
+            credentials: 'include'
         });
 
         if (!response.ok) {
