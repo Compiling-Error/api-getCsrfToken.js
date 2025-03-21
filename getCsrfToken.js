@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // 🔥 Allow requests from any domain
+    // Allow CORS requests from your frontend
+    res.setHeader('Access-Control-Allow-Origin', 'https://compiling-error.github.io');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -14,7 +15,7 @@ export default async function handler(req, res) {
                 'User-Agent': 'Mozilla/5.0',
                 'Accept': '*/*'
             },
-            credentials: 'include'
+            credentials: 'include' // 🔥 ClassLink might need authentication cookies
         });
 
         if (!response.ok) {
